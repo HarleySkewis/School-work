@@ -1,0 +1,27 @@
+BDRY_DIST = 20
+CITY_CLS_RATE = 2
+CITY_FAR_RATE = 1
+
+def getRate(dist):
+    if dist <= BDRY_DIST:
+        rate = CITY_CLS_RATE
+    else:
+        rate = CITY_FAR_RATE
+    return rate/100
+
+def print_output(years, rate, Cost):
+    print(f'{"year":<4}{"Value":>15}')
+    for count in range(1, years+1):
+        newvalue = Cost + (Cost * rate)
+        print(f'{count:>4}{newvalue:>15.2f}')
+        Cost = newvalue
+    print(f'\n The value of the property after {years} Years: {rate:.2f}')
+
+def main():
+    Cost = float(input('What is the current value of the property?: '))
+    dist = float(input('How far is the property from the city?: '))
+    years = int(input('Calculate value after how many years?: '))
+    rate = getRate(dist)
+    print_output(years, rate, Cost)
+
+main()
