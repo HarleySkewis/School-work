@@ -1,0 +1,59 @@
+import turtle
+
+def drawSquare(t, x, y, length):
+    t.up()
+    t.goto(x, y)
+    t.setheading(270)
+    t.down()
+    for count in range (4):
+        t.forward(length)
+        t.left(90)
+
+def drawTriangle(t, x, y, length):
+    t.up()
+    t.goto(x, y)
+    t.setheading(0)
+    t.down()
+    for count in range (3):
+        t.forward(length)
+        t.right(120)
+
+def drawStar(t, x, y, length):
+    t.up()
+    t.goto(x, y)
+    t.setheading(0)
+    t.down()
+    for count in range(5):
+        t.forward(length)
+        t.right(144)
+
+def main():
+    x = int(input('X value: '))
+    y = int(input('Y value: '))
+    length = int(input('Please enter a length: '))
+    shape = input('Input shape (S - Square, T - Triangle, St = Star): ')
+    shape = shape.upper()
+    t = turtle.Turtle()
+    if shape == 'ST':
+        drawStar(t, x, y, length)
+        print(f'({x:.2f},{y:.2f})')
+    elif shape == 'S':
+        color = input('Please enter desired color (R, G, B): ')
+        color = color.upper()
+        if color == 'R':
+            color = 'Red'
+        elif color == 'G':
+            color = 'Green'
+        elif color == 'B':
+            color = 'Blue'
+        t.color(color)
+        t.begin_fill()
+        drawSquare(t, x, y, length)
+        t.end_fill()
+        print(f'({x:.2f},{y:.2f})')
+    else:
+        drawTriangle(t, x, y, length)
+        print(f'({x:.2f},{y:.2f})')
+    turtle.done()
+
+main()
