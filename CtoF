@@ -1,0 +1,41 @@
+from tkinter import *
+
+myWindow = Tk()
+celsius = StringVar()
+fahrenheit = StringVar()
+
+def convertCtoF():
+    c = celsius.get()
+    far = float(c) * 9/5 + 32
+    fahrenheit.set(f"{far:.2f}")
+
+def convertFtoC():
+    f = fahrenheit.get()
+    cel = (float(f) - 32) * 5/9
+    celsius.set(f"{cel:.2f}")
+
+
+def main():
+    myWindow.title("Temperature Converter")
+
+    mylabel = Label (myWindow, text="Fahrenheit")
+    mylabel.grid(row=0, column=0)
+
+    mylabel2 = Label(myWindow, text="Celsius")
+    mylabel2.grid(row=0, column=1)
+
+    myEntry = Entry(myWindow, textvariable=fahrenheit)
+    myEntry.grid(row=1, column=0)
+
+    myEntry2 = Entry(myWindow, textvariable=celsius)
+    myEntry2.grid(row=1, column=1)
+
+    butt1 = Button(myWindow, text=">>>>>", command=convertFtoC)
+    butt1.grid(row=2, column=0)
+
+    butt2 = Button(myWindow, text="<<<<<", command=convertCtoF)
+    butt2.grid(row=2, column=1)
+
+    myWindow.mainloop()
+
+main()
