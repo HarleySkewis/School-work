@@ -1,0 +1,73 @@
+class ChairHire(object):
+    PS = 5
+    HBPC = 10.50
+    LC = 15
+
+    def __init__(self, name, type, days, num):
+        self._name = name
+        self._type = type
+        self._days = days
+        self._num = num
+
+
+    def _getChairRate(self):
+        rate = 0
+        if self._type == 'PS':
+            rate = self.PS
+        elif self._type == 'HB':
+            rate = self.HBPC
+        elif self._type == 'L':
+            rate = self.LC
+        return rate
+
+    def _getTotalCost(self):
+        return self._num * self._getChairRate() * self._days
+
+    def __str__(self):
+        output = '\n********** Chair Hire Quotation **********\n\n'
+        output += f'Customer name: {self._name}\n'
+        output += f'Cost per Chair:(type - {self._type}): ${self._getChairRate()}\n'
+        output += f'Number of Chairs: {self._num}\n'
+        output += f'Length of the hire: {self._days} days\n'
+        output += f'Quoted amount = $ {self._getTotalCost()}\n'
+        return output
+
+###############################################################################################
+Execute with below code
+#############################
+
+from chairhireclass import ChairHire
+
+
+def main():
+    print('----------Comfort Chair Hire - Hire Bookings----------\n')
+    name = input('Please input contact/company name: ')
+    print('\nCost of chair per day depends on the chair type')
+    print('PS - Packer Stacker Chair ($5), HB - High Back Plastic chair ($10.50), L - Lecture Chair ($15)\n')
+    type = input('Please select your chair type: ')
+    type = type.upper()
+    num = int(input('number of chairs required (1-50): '))
+    while True:
+        if num > 50:
+            num = int(input('Please Enter a valid number of chairs (1-50): '))
+        else:
+            break
+
+    while True:
+        try:
+            days = int(input("Please enter the duration of hire (in days): "))
+        except ValueError:
+            print('Oops that was not a valid number. Try again')
+        else:
+            if 1 <= days <= 12:
+                break
+            elif days == 0:
+                print('Please enter at least one day')
+            else:
+                print('Please enter a valid number of days (1-12)')
+
+
+    ch = ChairHire(name, type, days, num)
+    print(ch)
+
+main()
