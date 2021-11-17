@@ -1,0 +1,50 @@
+renoVal = float(input('What is the total cost to furnish? $: '))
+
+while True:
+    try:
+        depRate = input('Large or Small apartment (L - Large/S - Small): ')
+        depRate = depRate.upper()
+    except:
+        print('Invalid entry')
+    else:
+        if depRate == 'L' or depRate == 'S':
+            break
+        else:
+            print('Please select the correct selections (L or S)')
+
+while True:
+    try:
+        years = int(input('Enter number of years for the schedule: '))
+    except ValueError:
+        print('Oops that is not a valid number')
+    else:
+        if years in range(1, 11):
+            break
+        else:
+            print('please enter a number between 1 and 10')
+
+#convert percentage to a decimal this becomes %
+if depRate == "L":
+    rate = 0.10
+else:
+    rate = 0.08
+
+#add a new line before start printing the table
+print()
+
+#print table header
+print(f'{"year":<4}{"Depreciation":>20}{"Currently valued at $":>30}')
+#constant
+renocost = renoVal
+
+#print table
+for count in range(1, years+1):
+    newrenoval = renoVal - (renoVal * rate)
+    depre = newrenoval - renoVal
+    print(f'{count:>4}{depre:>20.2f}{newrenoval:>30.2f}')
+    renoVal = newrenoval
+    lost = renocost - renoVal
+
+#print the depreciation rate
+print(f'\nThe depreciation rate used: {rate:.2f}')
+print(f'Total depreciation at the end of schedule: {lost:.2f}')
