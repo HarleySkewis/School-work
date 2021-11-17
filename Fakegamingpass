@@ -1,0 +1,58 @@
+class Gamingpass(object):
+    FK_RATE = 22
+    LEL_RATE = 26
+    RHD_RATE = 29
+    WAW_RATE = 31
+
+    def __init__(self, name, date, game, numPasses, month):
+        self._name = name
+        self._date = date
+        self._game = game
+        self._numPasses = numPasses
+        self._month = month
+
+    def _getMontlyRate(self):
+        rate = 0
+        if self._game == 'FK':
+            rate = self.FK_RATE
+        elif self._game == 'LEL':
+            rate = self.LEL_RATE
+        elif self._game == 'RHD':
+            rate = self.RHD_RATE
+        elif self._game == 'WAW':
+            rate = self.WAW_RATE
+        return rate
+
+    def _getTotalCost(self):
+        return self._numPasses * self._month * self._getMontlyRate()
+
+    def __str__(self):
+        output = '\n**********Gaming Passes Cost Calculations**********\n\n'
+        output += f'Gaming passes for {self._name} on {self._date}\n'
+        output += f'Total duration of passes is {self._month}\n'
+        output += f'Monthly subscription cost = ${self._getMontlyRate():.2f}\n'
+        output += f'Total Purchase Cost ${self._getTotalCost():.2f} for {self._numPasses} passes for {self._game}\n'
+        if self._numPasses >= 5:
+            output += 'You are eligible for a free subscription to MineShaft'
+
+        return output
+       
+###################################################################################################################################
+Execute with this code
+
+from gamingpass import Gamingpass
+
+def main():
+    print('----------Game Passes Cost Calculation Program----------\n')
+    name = input('Please input purchasers name: ')
+    date = input('Please enter the date: ')
+    print('\nMonthly subscription cost depends on the selected game:')
+    print('FK - Forknife, LEL - Legs Of Legends, RHD - Red Head Dentation, WAW - Wall Of Windows')
+    game = input('Please select your game: ')
+    numPasses = int(input('Number of game passes required: '))
+    months = int(input('Enter the duration of the passes in months: '))
+
+    gp = Gamingpass(name, date, game, numPasses, months)
+    print(gp)
+
+main()
